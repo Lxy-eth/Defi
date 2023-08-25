@@ -1,13 +1,5 @@
-# Sample Hardhat Project
-
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, and a script that deploys that contract.
-
-Try running some of the following tasks:
-
-```shell
-npx hardhat help
-npx hardhat test
-REPORT_GAS=true npx hardhat test
-npx hardhat node
-npx hardhat run scripts/deploy.js
-```
+<p>a = a1b1 - a2b2 </p>
+<p>b = 2b1b2(a1 + a2)</p>
+<p>c = b1b2(a1b2-a2b1)</p>
+<p>ax^2 + bx +c = 0</p>
+<p>x = -b1b2(a1 + a2) / (a1b1 - a2b2) ± b1b2√(a1^2 + a2^2 + 2a1a2 - a1b1b2 - a2b1b2) / (a1b1 - a2b2)</p>
