@@ -224,7 +224,7 @@ contract FlashBot is Ownable , IFlashBot {
       }
 
 
-    function calcBorrowAmount(OrderedReserves memory reserves) internal pure returns (uint256 amount) {
+    function calcBorrowAmount(OrderedReserves memory reserves) public pure returns (uint256 amount) {
         uint256 minA = reserves.tokenA1 < reserves.tokenA2 ? reserves.tokenA1 : reserves.tokenA2;
         uint256 minB = reserves.tokenB1 < reserves.tokenB2 ? reserves.tokenB1 : reserves.tokenB2;
         uint256 min = minA < minB ? minA : minB;

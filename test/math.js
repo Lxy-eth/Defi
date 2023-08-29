@@ -19,17 +19,23 @@ describe('MathTest', () => {
             const [a, b, c] = ['12345678901234567890', '-98765432109876543210', '11111111111111111111'];
          
             const [x1, x2] = await flashbot.calcSolutionForQuadratic(a, b, c);    
-            console.log(x1.toString(), x2.toString())
+            //console.log(x1.toString(), x2.toString())
             expect(x1).to.be.eq(7);
             expect(x2).to.be.eq(0);      
         })
     })
     describe('calcBorrowAmount', () => {
         it("returns right amount with small liquidity pairs",async () => {
-            const reserves = {a1:5000,a2:10,b1:6000,b2:10}
-            const input = lodash.mapValues(reserves, (v) => ethers.utils.parseEther(v));
-            const out = await flashBot._calcBorrowAmount(input);
-            console.log(out)
+            const reserves = [
+                ethers.utils.parseEther('5000'),
+                ethers.utils.parseEther('10'),
+                ethers.utils.parseEther('6000'),
+                ethers.utils.parseEther('10')
+            ];
+            // console.log(reserves)
+           
+            const out = await flashbot.calcBorrowAmount(reserves);
+            expect(out).to.be.closeTo(ethers.utils.parseEther('0.45'), ethers.utils.parseEther('0.01'));
         })
     })
 })
