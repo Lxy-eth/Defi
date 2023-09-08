@@ -1,0 +1,39 @@
+struct ExactInputParams {
+    bytes path;                   //路径    
+    address recipient;            //接收地址
+    uint256 deadline;             //交易的有效期    
+    uint256 amountIn;             //输入的token数量，在path中的第一个address
+    uint256 amountOutMinimum;     //最小输出数量 ,在path中的最后一个address
+}
+
+
+function exactInput(
+    ExactInputParams memory params
+) external paybale checkDeadline(params.deadline) returns (uint256 aamountOut) {
+    //通过循环遍历传入的路径
+    while (true) {
+
+        bool hasMultiplePools = params.path.hasMultiplePools(); 
+        
+        params.amountIn = exactInputSingle(
+            params.amountIn,
+            hasMultiplePools ? address(this) : params.recipient,0,
+            SwapCallbackData({
+                path: params.path.getFirstPool(),
+                payer : payer
+            })
+        );
+        if (hasMultiplePools) {
+            payer = address(this); 
+            params.path = params.path.skipToken();
+        } else {
+            amountOut = params.amountIn;
+            break;
+        }
+
+    }
+    //检查是否满足预期
+    require(amountOut >= params.amountOutMinimum, 'Too little received);
+
+}
+//在path中bytes是作为一个数组，前20bytes是token0的地址，然后接着3bytes(fee)
