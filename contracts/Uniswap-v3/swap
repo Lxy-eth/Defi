@@ -37,3 +37,23 @@ function exactInput(
 
 }
 //在path中bytes是作为一个数组，前20bytes是token0的地址，然后接着3bytes(fee)
+
+
+//单个池子的交易过程
+    struct ExactInputSingleParams {
+        address tokenIn;
+        address tokenOut;
+        uint24 fee;
+        address recipient;
+        uint256 deadline;
+        uint256 amountIn;
+        uint256 amountOutMinimum;
+        uint160 sqrtPriceLimitX96;
+    }
+
+    
+    function exactInputSingle(
+        uint256 amountIn,
+        address recipient,
+        Swap
+    )
